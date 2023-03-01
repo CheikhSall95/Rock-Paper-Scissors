@@ -9,7 +9,7 @@ function getComputerChoice () {
         } else {   
         computerSelection = "scissors";     
     }
-    return hand;
+    return computerSelection;
   }
 
 
@@ -41,3 +41,33 @@ function playRound(playerSelection, computerSelection) {
     return winner;
 
   }
+
+  function game () {
+
+    let computer = 0;
+    let player = 0;
+    for (let i = 0; i < 5; i++) {
+        let playerSelection = prompt('What do you choose?');
+        let computerSelection = getComputerChoice();
+
+        winner = playRound(playerSelection, computerSelection)
+        console.log(winner)
+        if (winner.charAt(4) == 'w') {
+            player ++ ;
+        }   else if (winner.charAt(4) == 'l') {
+            computer ++;
+        }
+
+     }
+    
+    if (player > computer )  {
+        console.log('You win!')
+    }   else if (player < computer) {
+        console.log('You lose!')
+    }   else {
+        console.log('It is a tie!')
+    }
+
+  }
+
+  game();
