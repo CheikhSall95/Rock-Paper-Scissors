@@ -37,37 +37,43 @@ function playRound(playerSelection, computerSelection) {
     }   else  {
         winner ='You win! Rock beats Scissors!';
     }
-    
+    console.log(winner);
     return winner;
 
   }
 
   function game () {
 
-    let computer = 0;
-    let player = 0;
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt('What do you choose?');
-        let computerSelection = getComputerChoice();
+    const buttons = document.querySelectorAll('button');
+    const container = document.querySelector('.container');
+    const h3 = document.createElement('h3');
+    h3.style.color = 'blue';  
+    h3.textContent = "Choose Rock, Paper or Scissors";
+    const scores = document.createElement('h1');
 
-        winner = playRound(playerSelection, computerSelection)
-        console.log(winner)
-        if (winner.charAt(4) == 'w') {
-            player ++ ;
-        }   else if (winner.charAt(4) == 'l') {
-            computer ++;
-        }
+    container.appendChild(h3);
 
-     }
+ 
+      buttons.forEach((button) => {
+
+        // and for each one we add a 'click' listener
+        button.addEventListener('click', (e) => {
+            console.log(button.id);
+            let playerSelection= button.id;
+            let computerSelection = getComputerChoice ();
+            let winner = playRound(playerSelection, computerSelection);
+            h3.textContent = winner;
+            
+        });
+      });
+
+     
     
-    if (player > computer )  {
-        console.log('You win!')
-    }   else if (player < computer) {
-        console.log('You lose!')
-    }   else {
-        console.log('It is a tie!')
-    }
-
   }
 
   game();
+
+ 
+
+
+
