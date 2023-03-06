@@ -45,25 +45,40 @@ function playRound(playerSelection, computerSelection) {
   function game () {
 
     const buttons = document.querySelectorAll('button');
-    const container = document.querySelector('.container');
-    const h3 = document.createElement('h3');
-    h3.style.color = 'blue';  
-    h3.textContent = "Choose Rock, Paper or Scissors";
-    const scores = document.createElement('h1');
-
-    container.appendChild(h3);
-
+    let computer = 0;
+    let player = 0;
+    
  
       buttons.forEach((button) => {
 
         // and for each one we add a 'click' listener
         button.addEventListener('click', (e) => {
-            console.log(button.id);
             let playerSelection= button.id;
             let computerSelection = getComputerChoice ();
             let winner = playRound(playerSelection, computerSelection);
-            h3.textContent = winner;
-            
+
+            if (winner.charAt(4) == 'w') {
+                player ++ ;
+            }   else if (winner.charAt(4) == 'l') {
+                computer ++;
+            }
+            const result = document.querySelector('.result');
+            result.textContent = winner;
+            const playersScore = document.querySelector('#player');
+            const computerScore = document.querySelector('#computer');
+            playersScore.textContent = `Player score : ${player}`;
+            computerScore.textContent = `Computer score : ${computer}`;
+            if (player == 5 || computer == 5){
+                if (player == 5){
+                    result.textContent = "Game Over! You Win!";
+                }
+                else{
+                    result.textContent = "Game Over! You Lose!"
+                }
+                player = 0;
+                computer = 0;
+            }
+            console.log(player)
         });
       });
 
